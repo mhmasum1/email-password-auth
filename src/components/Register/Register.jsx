@@ -11,6 +11,27 @@ const Register = () => {
         const password = e.target.password.value;
         console.log(email, password)
 
+        // const passwordPattern = /^.{6,}$/;
+        // const casePattern = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+
+
+
+        // if (!passwordPattern.test(password)) {
+        //     console.log("password did not match")
+        //     setError('password must be 6 charecters or longer')
+        //     return;
+        // }
+        // else if (!casePattern.test(password)) {
+        //     setError("password must have at least one uppercase and one lower case");
+        //     return;
+        // }
+        const passPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{6,}$/;
+        if (!passPattern.test(password)) {
+            setError('Password must have at least 6 characters, one uppercase, one lowercase, and one special character (!@#$%^&*).')
+            return;
+        }
+
+
         setError('');
         setSuccess(false);
 
