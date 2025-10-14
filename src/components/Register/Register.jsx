@@ -1,10 +1,13 @@
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import React, { useState } from 'react';
 import { auth } from '../../firebase/firebase.init';
+import { IoEyeOutline } from 'react-icons/io5';
+import { FiEyeOff } from 'react-icons/fi';
 
 const Register = () => {
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState('')
+    const [showPassword, setShowPassword] = useState(false)
     const handleform = e => {
         e.preventDefault();
         const email = e.target.email.value;
@@ -50,6 +53,10 @@ const Register = () => {
             })
 
     }
+    const handleShowPassword = e => {
+        e.preventDefault();
+        setShowPassword(!showPassword);
+    }
 
     return (
         <div className="hero bg-base-200 min-h-screen">
@@ -64,7 +71,10 @@ const Register = () => {
                                 <label className="label">Email</label>
                                 <input type="email" name='email' className="input" placeholder="Email" />
                                 <label className="label">Password</label>
-                                <input type="password" name='password' className="input" placeholder="Password" />
+                                <div className=' relative '>
+                                    <input type={showPassword ? 'text' : 'password'} name='password' className="input" placeholder="Password" />
+                                    <button onClick={handleShowPassword} className="btn btn-xs absolute top-2 right-5">{showPassword ? <FiEyeOff /> : <IoEyeOutline />}</button>
+                                </div>
                                 <div><a className="link link-hover">Forgot password?</a></div>
                                 <button className="btn btn-neutral mt-4">Register now</button>
                             </fieldset>
