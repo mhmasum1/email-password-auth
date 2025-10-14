@@ -12,6 +12,7 @@ const Register = () => {
         e.preventDefault();
         const email = e.target.email.value;
         const password = e.target.password.value;
+        const cheackBox = e.target.terms.checked
         console.log(email, password)
 
         // const passwordPattern = /^.{6,}$/;
@@ -33,7 +34,10 @@ const Register = () => {
             setError('Password must have at least 6 characters, one uppercase, one lowercase, and one special character (!@#$%^&*).')
             return;
         }
-
+        if (!cheackBox) {
+            setError("Plase accept our terns and conditions")
+            return;
+        }
 
         setError('');
         setSuccess(false);
@@ -74,6 +78,12 @@ const Register = () => {
                                 <div className=' relative '>
                                     <input type={showPassword ? 'text' : 'password'} name='password' className="input" placeholder="Password" />
                                     <button onClick={handleShowPassword} className="btn btn-xs absolute top-2 right-5">{showPassword ? <FiEyeOff /> : <IoEyeOutline />}</button>
+                                </div>
+                                <div>
+                                    <label className="label">
+                                        <input name='terms' type="checkbox" className="checkbox" />
+                                        Accept terms and conditions
+                                    </label>
                                 </div>
                                 <div><a className="link link-hover">Forgot password?</a></div>
                                 <button className="btn btn-neutral mt-4">Register now</button>
