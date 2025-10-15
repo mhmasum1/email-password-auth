@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { auth } from '../../firebase/firebase.init';
 import { IoEyeOutline } from 'react-icons/io5';
 import { FiEyeOff } from 'react-icons/fi';
+import { Link } from 'react-router';
 
 const Register = () => {
     const [success, setSuccess] = useState(false);
@@ -95,7 +96,9 @@ const Register = () => {
                                 error && <p className='text-red-500'>{error}</p>
                             }
                         </form>
+                        <p>Already have an account. Please <Link className='text-blue-500 underline ' to='/login'>Log in </Link> </p>
                     </div>
+
                 </div>
             </div>
         </div>
