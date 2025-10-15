@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
 import React, { useState } from 'react';
 import { auth } from '../../firebase/firebase.init';
 import { IoEyeOutline } from 'react-icons/io5';
@@ -49,11 +49,17 @@ const Register = () => {
                 console.log('after create a user', result.user)
                 setSuccess(true);
                 e.target.reset();
+                // send verification email 
+                sendEmailVerification(result.user)
+                    .then(() => {
+                        alert("Please varify your email ")
+                    })
 
             })
             .catch(error => {
                 console.log(error.message);
                 setError(error.message)
+
 
             })
 
@@ -86,7 +92,6 @@ const Register = () => {
                                         Accept terms and conditions
                                     </label>
                                 </div>
-                                <div><a className="link link-hover">Forgot password?</a></div>
                                 <button className="btn btn-neutral mt-4">Register now</button>
                             </fieldset>
                             {
